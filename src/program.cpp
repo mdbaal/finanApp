@@ -16,10 +16,23 @@ bool running = true;
 
 void newSummary() {
 	std::string str = c.getNameFromInput();
+	if (summaries.at(str) != nullptr) {
+		o.message("This summary already exist");
+		return;
+	}
 	Summary* s =  new Summary();
 	summaries.insert_or_assign(str,s);
 	currentSummary = s;
+	s->name = str;
 	o.message("Created new summary " + str);
+}
+void removeSummary() {
+	std::string str = c.getNameFromInput();
+	Summary* s = summaries.at(str);
+	summaries.erase(str);
+	delete s;
+	s = nullptr;
+	o.message("Removed " + str);
 }
 void loadSummary() {
 	std::string str = c.getNameFromInput();
