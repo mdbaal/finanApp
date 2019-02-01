@@ -16,18 +16,26 @@ bool running = true;
 
 void newSummary() {
 	std::string str = c.getNameFromInput();
-	if (summaries.at(str) != nullptr) {
-		o.message("This summary already exist");
-		return;
+
+	if (summaries.size() > 0) {
+		if (summaries.at(str) != nullptr) {
+			o.message("This summary already exist");
+			return;
+		}
 	}
+
 	Summary* s =  new Summary();
 	summaries.insert_or_assign(str,s);
 	currentSummary = s;
 	s->name = str;
 	o.message("Created new summary " + str);
 }
-void removeSummary() {
+void deleteSummary() {
 	std::string str = c.getNameFromInput();
+	if (summaries.count(str) == 0){
+		o.message("Summary doesn't exist"); 
+		return;
+	}
 	Summary* s = summaries.at(str);
 	summaries.erase(str);
 	delete s;
@@ -36,30 +44,53 @@ void removeSummary() {
 }
 void loadSummary() {
 	std::string str = c.getNameFromInput();
+	if (summaries.count(str) == 0) {
+		o.message("Summary doesn't exist");
+		return;
+	}
 	currentSummary = summaries.at(str);
 	o.message("Loaded summary " + str);
 }
 void saveSummary() {
-	o.message("saving..");
+	
 	std::string str = currentSummary->name;
+	if (currentSummary == nullptr) {
+		o.message("No summary loaded");
+		return;
+	}
+	o.message("saving..");
 	summaries.insert_or_assign(str, currentSummary);
 	o.message("Saved");
 }
 void viewSummary() {
-	o.drawSummary(currentSummary);
+	if (currentSummary == nullptr) {
+		o.message("No summary loaded");
+		return;
+	}
 	o.message("Viewing summary " + currentSummary->name);
+	o.drawSummary(currentSummary);
+	
 }
+
 void addToSummary() {
+	if (currentSummary == nullptr) {
+		o.message("No summary loaded");
+		return;
+	}
 	std::string str = c.getNameFromInput();
 	float f = c.getValueFromInput();
 	currentSummary->add(str, f);
-	o.message("Added " + str + "-" + std::to_string(f) + " to summary " + currentSummary->name);
+	o.message("Added " + str + " - " + std::to_string(f) + " to summary " + currentSummary->name);
 }
 void removeFromSummary() {
+	if (currentSummary == nullptr) {
+		o.message("No summary loaded");
+		return;
+	}
 	std::string str = c.getNameFromInput();
 	float f = currentSummary->getValue(str);
 	currentSummary->remove(str);
-	o.message("Removed " + str + "-" + std::to_string(f) + " from summary " + currentSummary->name);
+	o.message("Removed " + str + " - " + std::to_string(f) + " from summary " + currentSummary->name);
 }
 void quit() {
 	o.message("Goodbye");
@@ -70,6 +101,9 @@ void getAction() {
 	std::string str = c.getCommandFromInput();
 	if (str == NEW) {
 		newSummary();
+	}
+	else if (str == DELETE) {
+		deleteSummary();
 	}
 	else if (str == LOAD) {
 		loadSummary();
@@ -88,6 +122,9 @@ void getAction() {
 	}
 	else if (str == QUIT || str == EXIT) {
 		quit();
+	}
+	else if (str == HELP) {
+		o.printHelp();
 	}
 }
 
