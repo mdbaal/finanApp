@@ -69,7 +69,6 @@ void viewSummary() {
 	}
 	o.message("Viewing summary " + currentSummary->name);
 	o.drawSummary(currentSummary);
-	
 }
 
 void addToSummary() {

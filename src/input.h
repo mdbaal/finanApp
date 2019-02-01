@@ -12,7 +12,7 @@ public:
 	
 	std::string readline();
 private:
-	
+	std::string invalidChars = "!@#$%^&*()_+=:;'<>?/\|~`";
 
 };
 
