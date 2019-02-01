@@ -2,7 +2,7 @@
 #define	COMMANDS_H
 
 #define NEW "new"
-#define DELETE "delete"
+#define DEL "delete"
 #define LOAD "load"
 #define SAVE "save"
 #define VIEW "view"

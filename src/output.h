@@ -4,6 +4,7 @@
 #include "summary.h"
 #include <iostream>
 #include <string>
+#include <Windows.h>
 
 class Output{
 public:

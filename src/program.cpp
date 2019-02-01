@@ -101,7 +101,7 @@ void getAction() {
 	if (str == NEW) {
 		newSummary();
 	}
-	else if (str == DELETE) {
+	else if (str == DEL) {
 		deleteSummary();
 	}
 	else if (str == LOAD) {

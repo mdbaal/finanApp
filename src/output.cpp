@@ -10,14 +10,24 @@ Output::~Output(){
 }
 
 void Output::drawSummary(Summary* s) {
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	std::cout << std::endl;
 	std::map<std::string, float> _map = s->getMap();
 	float total = 0;
 	for (std::map<std::string,float>::iterator it = _map.begin(); it != _map.end(); ++it) {
+		if (it->second < 0) {
+			SetConsoleTextAttribute(hConsole, 12);
+		}
+		else {
+			SetConsoleTextAttribute(hConsole, 10);
+		}
 		std::cout << it->first << " - " << it->second << std::endl << std::endl;
 		total += it->second;
 	}
+	if (total < 0) SetConsoleTextAttribute(hConsole, 12); else SetConsoleTextAttribute(hConsole, 10);
 	std::cout << "total: " << total << std::endl;
+
+	SetConsoleTextAttribute(hConsole, 7);
 }
 
 void Output::printHelp() {
