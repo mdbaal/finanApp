@@ -24,7 +24,14 @@ void Output::drawSummary(Summary* s) {
 		std::cout << it->first << " - " << it->second << std::endl << std::endl;
 		total += it->second;
 	}
+	SetConsoleTextAttribute(hConsole, 7);
+	for (int i = 0; i < std::to_string(total).length(); i++) {
+		std::cout << "#";
+	}
+
 	if (total < 0) SetConsoleTextAttribute(hConsole, 12); else SetConsoleTextAttribute(hConsole, 10);
+	
+	std::cout << std::endl;
 	std::cout << "total: " << total << std::endl;
 
 	SetConsoleTextAttribute(hConsole, 7);
