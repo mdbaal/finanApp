@@ -13,6 +13,6 @@ src/summary.h
 src/commands.h
 src/commandHandler.cpp
 src/commandHandler.h
-scr/filehandler.cpp
+src/filehandler.cpp
 src/filehandler.h
 )

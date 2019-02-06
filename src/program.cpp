@@ -2,11 +2,13 @@
 #include "output.h"
 #include "summary.h"
 #include <map>
+#include "filehandler.h"
 #include <fstream>
 #include <string>
 #include <iostream>
 
 CommandHandler c = CommandHandler();
+Filehandler f = Filehandler();
 Output o = Output();
 
 std::map<std::string, Summary*> summaries = std::map<std::string, Summary*>();
@@ -14,67 +16,10 @@ Summary* currentSummary = nullptr;
 
 bool running = true;
 
-void saveToFile() {
-	if (currentSummary == nullptr) return;
-	std::ofstream file;
 
-	file.open(currentSummary->name + ".txt",std::iostream::trunc);
-
-	if (file.fail()) {
-		o.message("Can't open file");
-		return;
-	}
-
-	file << currentSummary->name << std::endl;
-	if (!currentSummary->getMap().empty()) {
-		for (auto const& x : currentSummary->getMap()) {
-			file << x.first << std::endl;
-			file << x.second << std::endl;
-		}
-	}
-	file.close();
-}
-
-void loadFromFile(std::string _s) {
-	std::ifstream file;
-	std::string str = "";
-	std::string name = "";
-	float f = 0;
-	bool isfloat = false;
-	Summary* s = new Summary();
-
-	file.open(_s + ".txt");
-
-	if (file.fail()) {
-		o.message("Can't open file");
-		return;
-	}
-
-	std::getline(file, s->name);
-
-	while (std::getline(file, str)) {
-		if (!isfloat) {
-			name = str;
-			isfloat = true;
-		}
-		else {
-			f = std::stoi(str);
-			isfloat = false;
-		}
-
-		if (!str.empty() && !isfloat) {
-			s->add(name, f);
-		}
-	}
-	currentSummary = s;
-	s = nullptr;
-	delete s;
-}
 
 void newSummary() {
 	std::string str = c.getNameFromInput();
-
-	if (summaries.size() > 0) {
 		try {
 			if (summaries.at(str) != nullptr) {
 				o.message("This summary already exist");
@@ -82,15 +27,12 @@ void newSummary() {
 			}
 		}
 		catch (const std::out_of_range& oor) {
-			//
+			Summary* s = new Summary();
+			summaries.insert_or_assign(str, s);
+			currentSummary = s;
+			s->name = str;
+			o.message("Created new summary " + str);
 		}
-	}
-
-	Summary* s =  new Summary();
-	summaries.insert_or_assign(str,s);
-	currentSummary = s;
-	s->name = str;
-	o.message("Created new summary " + str);
 }
 void deleteSummary() {
 	std::string str = c.getNameFromInput();
@@ -106,9 +48,17 @@ void deleteSummary() {
 }
 void loadSummary() {
 	std::string str = c.getNameFromInput();
+	Summary s = f.loadFromFile(str);
+	if (s.name == str) {
+		currentSummary = new Summary();
+		if (!s.getMap().empty()) {
+			for (auto const& x : s.getMap()) {
+				currentSummary->add(x.first, x.second);
+			}
+			currentSummary->name = str;
+		}
+	}
 	
-	loadFromFile(str);
-	o.message("Loaded summary " + str);
 }
 void saveSummary() {
 	
@@ -118,9 +68,8 @@ void saveSummary() {
 		return;
 	}
 	o.message("saving..");
-	saveToFile();
-	//summaries.insert_or_assign(str, currentSummary);
-	o.message("Saved");
+	f.saveToFile(currentSummary);
+	//summaries.insert_or_assign(str, currentSummary
 }
 void viewSummary() {
 	if (currentSummary == nullptr) {
