@@ -14,6 +14,7 @@ public:
 	void drawSummary(Summary* s);
 	void message(std::string msg) { std::cout << std::endl << msg << std::endl; }
 	void printHelp();
+
 private:
 
 };
