@@ -66,3 +66,17 @@ Summary Filehandler::loadFromFile(std::string _s) {
 		return s;
 	}
 }
+
+void Filehandler::loadDirectory() {
+	
+}
+
+bool Filehandler::deleteFile(std::string str) {
+	std::string _str = str.append(".txt");
+	if (std::remove(_str.c_str()) == 0) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}

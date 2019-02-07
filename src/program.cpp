@@ -40,11 +40,16 @@ void deleteSummary() {
 		o.message("Summary doesn't exist"); 
 		return;
 	}
-	Summary* s = summaries.at(str);
-	summaries.erase(str);
-	delete s;
-	s = nullptr;
-	o.message("Removed " + str);
+	if (f.deleteFile(str)) {
+		Summary* s = summaries.at(str);
+		summaries.erase(str);
+		delete s;
+		s = nullptr;
+		o.message("Deleted " + str);
+	}
+	else {
+		o.message("Summary wasn't deleted, because an error occurred, please try again");
+	}
 }
 void loadSummary() {
 	std::string str = c.getNameFromInput();
@@ -61,15 +66,14 @@ void loadSummary() {
 	
 }
 void saveSummary() {
-	
-	std::string str = currentSummary->name;
 	if (currentSummary == nullptr) {
 		o.message("No summary loaded");
 		return;
 	}
+	std::string str = currentSummary->name;
 	o.message("saving..");
 	f.saveToFile(currentSummary);
-	//summaries.insert_or_assign(str, currentSummary
+	summaries.insert_or_assign(str, currentSummary);
 }
 void viewSummary() {
 	if (currentSummary == nullptr) {
@@ -134,6 +138,9 @@ void getAction() {
 	else if (str == HELP) {
 		o.printHelp();
 	}
+}
+void loadToSummaries() {
+	
 }
 
 
