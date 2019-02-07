@@ -113,31 +113,41 @@ void getAction() {
 	std::string str = c.getCommandFromInput();
 	if (str == NEW) {
 		newSummary();
+		return;
 	}
 	else if (str == DEL) {
 		deleteSummary();
+		return;
 	}
 	else if (str == LOAD) {
 		loadSummary();
+		return;
 	}
 	else if (str == SAVE) {
 		saveSummary();
+		return;
 	}
 	else if (str == VIEW) {
 		viewSummary();
+		return;
 	}
 	else if (str == ADD) {
 		addToSummary();
+		return;
 	}
 	else if (str == REMOVE) {
 		removeFromSummary();
+		return;
 	}
 	else if (str == QUIT || str == EXIT) {
 		quit();
+		return;
 	}
 	else if (str == HELP) {
 		o.printHelp();
+		return;
 	}
+	o.message("Wrong command entered, try again");
 }
 void loadToSummaries() {
 	
