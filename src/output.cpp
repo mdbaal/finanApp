@@ -1,5 +1,6 @@
 #include "output.h"
 
+
 Output::Output(){
 
 }
@@ -10,31 +11,31 @@ Output::~Output(){
 }
 
 void Output::drawSummary(Summary* s) {
-	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	std::cout << std::endl;
 	std::map<std::string, float> _map = s->getMap();
 	float total = 0;
 	for (std::map<std::string,float>::iterator it = _map.begin(); it != _map.end(); ++it) {
 		if (it->second < 0) {
-			SetConsoleTextAttribute(hConsole, 12);
+			std::cout << termcolor::red;
 		}
 		else {
-			SetConsoleTextAttribute(hConsole, 10);
+			std::cout << termcolor::green;
 		}
 		std::cout << it->first << " - " << it->second << std::endl << std::endl;
 		total += it->second;
+		std::cout << termcolor::reset;
 	}
-	SetConsoleTextAttribute(hConsole, 7);
+	
 	for (int i = 0; i < std::to_string(total).length(); i++) {
 		std::cout << "#";
 	}
 
-	if (total < 0) SetConsoleTextAttribute(hConsole, 12); else SetConsoleTextAttribute(hConsole, 10);
+	if (total < 0) std::cout << termcolor::red; else std::cout << termcolor::green;
 	
 	std::cout << std::endl;
 	std::cout << "total: " << total << std::endl;
 
-	SetConsoleTextAttribute(hConsole, 7);
+	std::cout << termcolor::reset;
 }
 
 void Output::printHelp() {

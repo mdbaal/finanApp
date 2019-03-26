@@ -4,8 +4,7 @@
 #include "summary.h"
 #include <iostream>
 #include <string>
-#include <Windows.h>
-#include <iomanip>
+#include <termcolor/termcolor.hpp>
 
 class Output{
 public:
