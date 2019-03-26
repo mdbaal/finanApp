@@ -11,8 +11,21 @@ public:
 	Output();
 	virtual ~Output();
 
+	enum termColor {
+		grey,
+		red,
+		green,
+		yellow,
+		blue,
+		magenta,
+		cyan,
+		white
+	};
+
+
 	void drawSummary(Summary* s);
 	void message(std::string msg) { std::cout << std::endl << msg << std::endl; }
+	void message(std::string msg, termColor c);
 	void printHelp();
 
 private:
