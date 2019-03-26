@@ -47,7 +47,13 @@ void deleteSummary() {
 		
 	}
 	else {
-		o.message("Summary wasn't deleted");
+		Summary* s = summaries.at(str);
+		summaries.erase(str);
+		s = nullptr;
+		delete s;
+		delete currentSummary;
+		currentSummary = nullptr;
+		o.message("Deleted " + str);
 	}
 }
 void loadSummary() {
