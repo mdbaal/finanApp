@@ -2,6 +2,10 @@
 cmake_minimum_required (VERSION 2.6)
 project (finanApp)
 
+include_directories(
+  external/termcolor/include/
+)
+
 add_executable( finanApp
 src/program.cpp
 src/input.cpp

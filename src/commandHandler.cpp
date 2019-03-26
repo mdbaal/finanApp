@@ -44,20 +44,10 @@ std::string CommandHandler::getNameFromInput() {
 //make call when program needs a value
 float CommandHandler::getValueFromInput() {
 	std::string temp = ""; 
-	for (int i = stringIndex; i < inputString.length(); i++) {
-		if (inputString[i] == ' ') {
-			stringIndex = i+1;
-			return std::stof(temp,NULL);
-			
-		}
-		else if (inputString[i] == inputString.back()){
-			stringIndex = i + 1;
-			temp += inputString[i];
-			return std::stof(temp, NULL);
-		}
-		else {
-			temp += inputString[i];
-		}
+	for (int i = stringIndex; i < inputString.length()+1; i++) {
+		
+		temp += inputString[i];
 	}
-	return 0;
+	
+	return std::stof(temp, NULL);
 }

@@ -3,9 +3,7 @@
 #include "summary.h"
 #include <map>
 #include "filehandler.h"
-#include <fstream>
 #include <string>
-#include <iostream>
 
 CommandHandler c = CommandHandler();
 Filehandler f = Filehandler();
@@ -15,8 +13,6 @@ std::map<std::string, Summary*> summaries = std::map<std::string, Summary*>();
 Summary* currentSummary = nullptr;
 
 bool running = true;
-
-
 
 void newSummary() {
 	std::string str = c.getNameFromInput();
@@ -43,12 +39,15 @@ void deleteSummary() {
 	if (f.deleteFile(str)) {
 		Summary* s = summaries.at(str);
 		summaries.erase(str);
-		delete s;
 		s = nullptr;
+		delete s;
+		delete currentSummary;
+		currentSummary = nullptr;
 		o.message("Deleted " + str);
+		
 	}
 	else {
-		o.message("Summary wasn't deleted, because an error occurred, please try again");
+		o.message("Summary wasn't deleted");
 	}
 }
 void loadSummary() {
@@ -63,7 +62,6 @@ void loadSummary() {
 			currentSummary->name = str;
 		}
 	}
-	
 }
 void saveSummary() {
 	if (currentSummary == nullptr) {
@@ -152,7 +150,10 @@ void getAction() {
 void loadToSummaries() {
 	
 }
-
+void clean() {
+	summaries.clear();
+	o.message("cleaned pointers");
+}
 
 
 int main() {
@@ -164,6 +165,7 @@ int main() {
 		getAction();
 	}
 	saveSummary();
+	clean();
 	return 0;
 }
 
