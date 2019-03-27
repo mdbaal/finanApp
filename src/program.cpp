@@ -16,6 +16,9 @@ bool running = true;
 
 void newSummary() {
 	std::string str = c.getNameFromInput();
+	if (str.empty()) {
+		o.message("Name is empty, creation failed");
+	}
 		try {
 			if (summaries.at(str) != nullptr) {
 				o.message("This summary already exist");
@@ -75,7 +78,7 @@ void saveSummary() {
 		return;
 	}
 	std::string str = currentSummary->name;
-	o.message("saving..");
+	o.message("Saving..");
 	f.saveToFile(currentSummary);
 	summaries.insert_or_assign(str, currentSummary);
 }
@@ -94,6 +97,9 @@ void addToSummary() {
 		return;
 	}
 	std::string str = c.getNameFromInput();
+	if (str.empty() || str == "") {
+		o.message("Missing name, adding entry failed");
+	}
 	float f = c.getValueFromInput();
 	currentSummary->add(str, f);
 	o.message("Added " + str + " - " + std::to_string(f) + " to summary " + currentSummary->name);
@@ -158,12 +164,11 @@ void loadToSummaries() {
 }
 void clean() {
 	summaries.clear();
-	o.message("cleaned pointers");
+	o.message("Cleaned pointers");
 }
 
 
 int main() {
-
 	//program loop
 	while (running) {
 		o.message("Enter a command");

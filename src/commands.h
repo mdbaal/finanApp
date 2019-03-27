@@ -1,6 +1,9 @@
 #ifndef COMMANDS_H
 #define	COMMANDS_H
 
+#include <vector>
+#include <string>
+
 #define NEW "new"
 #define DEL "delete"
 #define LOAD "load"

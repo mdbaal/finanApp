@@ -2,6 +2,7 @@
 #define COMMANDHANDLER_H
 
 #include "commands.h"
+#include <vector>
 #include "input.h"
 #include <string>
 #include <stdlib.h> 

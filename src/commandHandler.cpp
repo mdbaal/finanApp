@@ -38,7 +38,14 @@ std::string CommandHandler::getNameFromInput() {
 		else {
 			temp += inputString[i];
 		}
+		std::vector<std::string> s;// = allCommands();
+		for (int j = 0; j < s.size();j++) {
+			if (temp == s[j]) {
+				return "default";
+			}
+		}
 	}
+	
 	return temp;
 }
 //make call when program needs a value
@@ -48,6 +55,10 @@ float CommandHandler::getValueFromInput() {
 		
 		temp += inputString[i];
 	}
-	
-	return std::stof(temp, NULL);
+	try {
+		return std::stof(temp, NULL);
+	}
+	catch (std::exception e) {
+		return 0;
+	}
 }
