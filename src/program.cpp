@@ -61,14 +61,20 @@ void deleteSummary() {
 }
 void loadSummary() {
 	std::string str = c.getNameFromInput();
-	Summary s = f.loadFromFile(str);
-	if (s.name == str) {
-		currentSummary = new Summary();
-		if (!s.getMap().empty()) {
-			for (auto const& x : s.getMap()) {
-				currentSummary->add(x.first, x.second);
-			}
-			currentSummary->name = str;
+	if (summaries.count(str) > 0) {
+		currentSummary = summaries.at(str);
+		o.message("Loaded: " + str);
+	}
+	else {
+		Summary* s = f.loadFromFile(str);
+		if (s == nullptr) {
+			o.message("Summary doesn't exist, create a new one using 'new'");
+			return;
+		}
+		else {
+			summaries.insert_or_assign(str, s);
+			currentSummary = summaries.at(str);
+			o.message("Loaded: " + str);
 		}
 	}
 }

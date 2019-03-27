@@ -31,23 +31,25 @@ void Filehandler::saveToFile(Summary* current) {
 	o.message("Saved");
 }
 
-Summary Filehandler::loadFromFile(std::string _s) {
+Summary* Filehandler::loadFromFile(std::string _s) {
 	std::ifstream file;
 	std::string str = "";
 	std::string name = "";
 	float f = 0;
 	bool isfloat = false;
-	Summary s = Summary();
+	Summary* s = new Summary();
+	s->name = "summary";
 
 	file.open(_s + ".txt");
 
 	if (file.fail()) {
 		o.message("Can't open file");
-		return s;
+		delete s;
+		return nullptr;
 	}
 	else {
 
-		std::getline(file, s.name);
+		std::getline(file, s->name);
 
 		while (std::getline(file, str)) {
 			if (!isfloat) {
@@ -60,10 +62,10 @@ Summary Filehandler::loadFromFile(std::string _s) {
 			}
 
 			if (!str.empty() && !isfloat) {
-				s.add(name, f);
+				s->add(name, f);
 			}
 		}
-		o.message("Loaded summary " + s.name);
+		o.message("Loaded summary " + s->name);
 		return s;
 	}
 }

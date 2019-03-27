@@ -12,7 +12,7 @@ public:
 	virtual ~Filehandler();
 
 	void saveToFile(Summary* current);
-	Summary loadFromFile(std::string _s);
+	Summary* loadFromFile(std::string _s);
 	//function that return itterator or list of all summaries in a directory
 	void loadDirectory();
 	bool deleteFile(std::string str);
