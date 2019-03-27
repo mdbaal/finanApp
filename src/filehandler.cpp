@@ -43,6 +43,7 @@ Summary Filehandler::loadFromFile(std::string _s) {
 
 	if (file.fail()) {
 		o.message("Can't open file");
+		return s;
 	}
 	else {
 
