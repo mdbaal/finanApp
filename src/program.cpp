@@ -172,7 +172,7 @@ void getAction() {
 	o.message("Wrong command entered, try again");
 }
 void loadToSummaries() {
-	
+	summaries =	f.loadDirectory();
 }
 void clean() {
 	summaries.clear();
@@ -182,6 +182,7 @@ void clean() {
 
 int main() {
 	//program loop
+	loadToSummaries();
 	while (running) {
 		o.message("Enter a command",o.cyan);
 		c.getInput();

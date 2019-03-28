@@ -3,8 +3,12 @@
 
 #include <fstream>
 #include <string>
+#include <sstream>
 #include "summary.h"
 #include "output.h"
+
+#include <experimental/filesystem>
+namespace fs = std::experimental::filesystem;
 
 class Filehandler{
 public:
@@ -13,8 +17,8 @@ public:
 
 	void saveToFile(Summary* current);
 	Summary* loadFromFile(std::string _s);
-	//function that return itterator or list of all summaries in a directory
-	void loadDirectory();
+	//function that returns a map of all summaries in a directory
+	std::map<std::string,Summary*> loadDirectory();
 	bool deleteFile(std::string str);
 private:
 	Output o = Output();

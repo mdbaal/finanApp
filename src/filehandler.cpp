@@ -1,5 +1,6 @@
 #include "filehandler.h"
 
+
 Filehandler::Filehandler(){
 
 }
@@ -13,7 +14,7 @@ void Filehandler::saveToFile(Summary* current) {
 	if (current == nullptr) return;
 	std::ofstream file;
 
-	file.open(current->name + ".txt", std::iostream::trunc);
+	file.open("summaries/" + current->name + ".txt", std::iostream::trunc);
 
 	if (file.fail()) {
 		o.message("Can't open file");
@@ -39,7 +40,7 @@ Summary* Filehandler::loadFromFile(std::string _s) {
 	Summary* s = new Summary();
 	s->name = "summary";
 
-	file.open(_s + ".txt");
+	file.open("summaries/" + _s + ".txt");
 
 	if (file.fail()) {
 		o.message("Can't open file");
@@ -68,9 +69,23 @@ Summary* Filehandler::loadFromFile(std::string _s) {
 	}
 }
 
-void Filehandler::loadDirectory() {
-	
+std::map<std::string, Summary*> Filehandler::loadDirectory() {
+	std::string dir = "summaries/";
+	std::string filename;
+	std::istringstream entryPath;
+	std::map<std::string, Summary*> _map = std::map<std::string,Summary*>();
+	Summary* s = nullptr;
+
+	for (const auto & entry : fs::directory_iterator(dir)) {
+		entryPath.str(entry.path().filename().string());
+		std::getline(entryPath,filename,'.');
+		s = loadFromFile(filename);		
+		_map.insert_or_assign(s->name, s);
+	}
+
+	return _map;
 }
+
 
 bool Filehandler::deleteFile(std::string str) {
 	std::string _str = str.append(".txt");
