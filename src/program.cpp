@@ -179,7 +179,7 @@ void clean() {
 int main() {
 	//program loop
 	while (running) {
-		o.message("Enter a command");
+		o.message("Enter a command",o.cyan);
 		c.getInput();
 		getAction();
 	}
