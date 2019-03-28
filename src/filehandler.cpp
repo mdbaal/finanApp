@@ -28,7 +28,6 @@ void Filehandler::saveToFile(Summary* current) {
 		}
 	}
 	file.close();
-	o.message("Saved");
 }
 
 Summary* Filehandler::loadFromFile(std::string _s) {

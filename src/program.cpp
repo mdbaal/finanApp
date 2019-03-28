@@ -84,9 +84,9 @@ void saveSummary() {
 		return;
 	}
 	std::string str = currentSummary->name;
-	o.message("Saving..");
 	f.saveToFile(currentSummary);
 	summaries.insert_or_assign(str, currentSummary);
+	o.message("Saved");
 }
 void viewSummary() {
 	if (currentSummary == nullptr) {
@@ -130,7 +130,6 @@ void getAction() {
 	std::string str = c.command();
 	if (str == NEW) {
 		newSummary();
-		saveSummary();
 		return;
 	}
 	else if (str == DEL) {
