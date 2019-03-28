@@ -93,7 +93,7 @@ void viewSummary() {
 		o.message("No summary loaded");
 		return;
 	}
-	o.message("Viewing summary " + currentSummary->name);
+	o.message("Viewing summary " + currentSummary->name,4);
 	o.drawSummary(currentSummary);
 }
 
@@ -105,6 +105,7 @@ void addToSummary() {
 	std::string str = c.argument1();
 	if (str.empty() || str == "") {
 		o.message("Missing name, adding entry failed");
+		return;
 	}
 	float f = c.argument2();
 	currentSummary->add(str, f);

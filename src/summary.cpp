@@ -18,3 +18,12 @@ void Summary::add(std::string s,float f) {
 void Summary::remove(std::string s) {
 	values.erase(s);
 }
+
+float Summary::getValue(std::string s) {
+	try {
+		return values.at(s);
+	}
+	catch (std::exception e) {
+		return 0;
+	}
+}
