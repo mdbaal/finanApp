@@ -165,6 +165,10 @@ void getAction() {
 		o.printHelp();
 		return;
 	}
+	else if (str == LIST) {
+		o.printSummariesList(summaries);
+		return;
+	}
 	o.message("Wrong command entered, try again");
 }
 void loadToSummaries() {

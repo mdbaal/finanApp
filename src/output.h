@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <termcolor/termcolor.hpp>
+#include <map>
 
 class Output{
 public:
@@ -27,6 +28,7 @@ public:
 	void message(std::string msg) { std::cout << std::endl << msg << std::endl; }
 	void message(std::string msg, termColor c);
 	void printHelp();
+	void printSummariesList(std::map<std::string,Summary*> s);
 
 private:
 

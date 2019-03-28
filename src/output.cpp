@@ -94,3 +94,11 @@ void Output::printHelp() {
 	std::cout << "* help - show all commands" << std::endl;
 	std::cout << std::endl;
 }
+
+void Output::printSummariesList(std::map<std::string,Summary*> s) {
+	std::cout << "List of all Summaries:" << std::endl << std::endl;
+	for (auto it = s.begin(); it != s.end(); it++) {
+		this->message("* " + it->first);
+	}
+	std::cout << std::endl;
+}

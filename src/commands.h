@@ -6,6 +6,7 @@
 
 #define NEW "new"
 #define DEL "delete"
+#define LIST "list"
 #define LOAD "load"
 #define SAVE "save"
 #define VIEW "view"
