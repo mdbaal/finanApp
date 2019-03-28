@@ -169,6 +169,10 @@ void getAction() {
 		o.printSummariesList(summaries);
 		return;
 	}
+	else if (str == CLEAR) {
+		o.clearScreen();
+		return;
+	}
 	o.message("Wrong command entered, try again");
 }
 void loadToSummaries() {

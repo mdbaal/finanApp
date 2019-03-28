@@ -14,6 +14,7 @@
 #define REMOVE "remove"
 #define EXIT "exit"
 #define HELP "help"
+#define CLEAR "clear"
 #define QUIT "quit"
 
 

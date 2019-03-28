@@ -27,6 +27,7 @@ public:
 	void drawSummary(Summary* s);
 	void message(std::string msg) { std::cout << std::endl << msg << std::endl; }
 	void message(std::string msg, termColor c);
+	void clearScreen(){ std::cout << std::string(100, '\n'); }
 	void printHelp();
 	void printSummariesList(std::map<std::string,Summary*> s);
 
