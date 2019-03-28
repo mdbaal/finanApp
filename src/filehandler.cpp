@@ -65,7 +65,6 @@ Summary* Filehandler::loadFromFile(std::string _s) {
 				s->add(name, f);
 			}
 		}
-		o.message("Loaded summary " + s->name);
 		return s;
 	}
 }

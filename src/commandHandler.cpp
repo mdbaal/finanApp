@@ -1,7 +1,7 @@
 #include "commandHandler.h"
 
 CommandHandler::CommandHandler(){
-
+	
 }
 
 CommandHandler::~CommandHandler(){
@@ -27,15 +27,18 @@ std::vector<std::string> CommandHandler::arguments() {
 
 //make call from program to see what to do.
 std::string CommandHandler::command() {
+	if (argumentList.size() < 1) return "";
 	return argumentList[0];
 }
 //make call when program needs a name
 std::string CommandHandler::argument1() {
+	if (argumentList.size() < 2) return "";
 	return argumentList[1];
 }
 //make call when program needs a value
 float CommandHandler::argument2() {
 	try {
+		if (argumentList.size() < 3) return 0;
 		return std::stof(argumentList[2], NULL);
 	}
 	catch (std::exception e) {

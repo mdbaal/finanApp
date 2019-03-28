@@ -10,7 +10,7 @@ Output::~Output(){
 
 }
 
-void Output::message(std::string msg, termColor c) {
+void Output::message(std::string msg, int c) {
 	switch (c) {
 	case 0: //grey
 		std::cout << termcolor::grey << msg << std::endl;

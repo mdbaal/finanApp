@@ -63,7 +63,7 @@ void loadSummary() {
 	std::string str = c.argument1();
 	if (summaries.count(str) > 0) {
 		currentSummary = summaries.at(str);
-		o.message("Loaded: " + str);
+		o.message("Loaded: " + str,4);
 	}
 	else {
 		Summary* s = f.loadFromFile(str);
@@ -74,7 +74,7 @@ void loadSummary() {
 		else {
 			summaries.insert_or_assign(str, s);
 			currentSummary = summaries.at(str);
-			o.message("Loaded: " + str);
+			o.message("Loaded: " + str,4);
 		}
 	}
 }
@@ -129,6 +129,7 @@ void getAction() {
 	std::string str = c.command();
 	if (str == NEW) {
 		newSummary();
+		saveSummary();
 		return;
 	}
 	else if (str == DEL) {
@@ -144,6 +145,7 @@ void getAction() {
 		return;
 	}
 	else if (str == VIEW) {
+		saveSummary();
 		viewSummary();
 		return;
 	}
