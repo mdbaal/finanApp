@@ -1,27 +1,29 @@
 #ifndef COMMANDHANDLER_H
 #define COMMANDHANDLER_H
 
+#include <string>
+#include <stdlib.h> 
+#include <iostream>
+#include <sstream>
 #include "commands.h"
 #include <vector>
 #include "input.h"
-#include <string>
-#include <stdlib.h> 
-
 
 class CommandHandler{
 public:
 	CommandHandler();
 	virtual ~CommandHandler();
 	void getInput();
-	std::string getCommandFromInput();
-	std::string getNameFromInput();
-	float getValueFromInput();
+	std::vector<std::string> arguments();
+	std::string command();
+	std::string argument1();
+	float argument2();
 
 private:
 	Input input =  Input();
-	std::string inputString = "";
-
-	int stringIndex = 0;
+	std::istringstream inputString;
+	std::vector<std::string> argumentList = std::vector<std::string>();
+	void getArguments();
 };
 
 #endif //COMMANDHANDLER_H

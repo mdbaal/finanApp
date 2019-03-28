@@ -9,54 +9,34 @@ CommandHandler::~CommandHandler(){
 
 }
 void CommandHandler::getInput() {
-	inputString = "";
-	inputString = input.readline();
+	inputString.clear();
+	inputString.str(input.readline());
+	getArguments();
 }
+void CommandHandler::getArguments() {
+	std::string temp;
+	argumentList.clear();
+	while (std::getline(inputString, temp, ' ')) {
+		argumentList.push_back(temp);
+	};
+}
+std::vector<std::string> CommandHandler::arguments() {
+	return argumentList;
+}
+
+
 //make call from program to see what to do.
-std::string CommandHandler::getCommandFromInput() {
-	stringIndex = 0;
-	std::string temp = "";
-	for (int i = stringIndex; i < inputString.length();i++) {
-		if (inputString[i] == ' ') {
-			stringIndex = i+1;
-			return temp;
-		}
-		else {
-			temp += inputString[i];
-		}
-	}
-	return temp;
+std::string CommandHandler::command() {
+	return argumentList[0];
 }
 //make call when program needs a name
-std::string CommandHandler::getNameFromInput() {
-	std::string temp = "";
-	for (int i = stringIndex; i < inputString.length(); i++) {
-		if (inputString[i] == ' ') {
-			stringIndex = i+1;
-			return temp;
-		}
-		else {
-			temp += inputString[i];
-		}
-		std::vector<std::string> s;// = allCommands();
-		for (int j = 0; j < s.size();j++) {
-			if (temp == s[j]) {
-				return "default";
-			}
-		}
-	}
-	
-	return temp;
+std::string CommandHandler::argument1() {
+	return argumentList[1];
 }
 //make call when program needs a value
-float CommandHandler::getValueFromInput() {
-	std::string temp = ""; 
-	for (int i = stringIndex; i < inputString.length()+1; i++) {
-		
-		temp += inputString[i];
-	}
+float CommandHandler::argument2() {
 	try {
-		return std::stof(temp, NULL);
+		return std::stof(argumentList[2], NULL);
 	}
 	catch (std::exception e) {
 		return 0;

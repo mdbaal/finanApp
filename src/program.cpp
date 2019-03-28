@@ -5,7 +5,7 @@
 #include "filehandler.h"
 #include <string>
 
-CommandHandler c = CommandHandler();
+CommandHandler c;
 Filehandler f = Filehandler();
 Output o = Output();
 
@@ -15,7 +15,7 @@ Summary* currentSummary = nullptr;
 bool running = true;
 
 void newSummary() {
-	std::string str = c.getNameFromInput();
+	std::string str = c.argument1();
 	if (str.empty()) {
 		o.message("Name is empty, creation failed");
 	}
@@ -34,7 +34,7 @@ void newSummary() {
 		}
 }
 void deleteSummary() {
-	std::string str = c.getNameFromInput();
+	std::string str = c.argument1();
 	if (summaries.count(str) == 0){
 		o.message("Summary doesn't exist"); 
 		return;
@@ -60,7 +60,7 @@ void deleteSummary() {
 	}
 }
 void loadSummary() {
-	std::string str = c.getNameFromInput();
+	std::string str = c.argument1();
 	if (summaries.count(str) > 0) {
 		currentSummary = summaries.at(str);
 		o.message("Loaded: " + str);
@@ -102,11 +102,11 @@ void addToSummary() {
 		o.message("No summary loaded");
 		return;
 	}
-	std::string str = c.getNameFromInput();
+	std::string str = c.argument1();
 	if (str.empty() || str == "") {
 		o.message("Missing name, adding entry failed");
 	}
-	float f = c.getValueFromInput();
+	float f = c.argument2();
 	currentSummary->add(str, f);
 	o.message("Added " + str + " - " + std::to_string(f) + " to summary " + currentSummary->name);
 }
@@ -115,7 +115,7 @@ void removeFromSummary() {
 		o.message("No summary loaded");
 		return;
 	}
-	std::string str = c.getNameFromInput();
+	std::string str = c.argument1();
 	float f = currentSummary->getValue(str);
 	currentSummary->remove(str);
 	o.message("Removed " + str + " - " + std::to_string(f) + " from summary " + currentSummary->name);
@@ -126,7 +126,7 @@ void quit() {
 }
 
 void getAction() {
-	std::string str = c.getCommandFromInput();
+	std::string str = c.command();
 	if (str == NEW) {
 		newSummary();
 		return;
