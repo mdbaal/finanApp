@@ -10,7 +10,7 @@ Output::~Output(){
 
 }
 
-void Output::message(std::string msg, int c) {
+void Output::message(std::string msg, termColor c) {
 	switch (c) {
 	case 0: //grey
 		std::cout << std::endl << termcolor::grey << msg << std::endl;
@@ -67,7 +67,9 @@ void Output::drawSummary(Summary* s) {
 	}
 	
 	for (int i = 0; i < std::to_string(total).length(); i++) {
+		std::cout << termcolor::blue;
 		std::cout << "#";
+		std::cout << termcolor::reset;
 	}
 
 	if (total < 0) std::cout << termcolor::red; else std::cout << termcolor::green;

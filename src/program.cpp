@@ -63,7 +63,7 @@ void loadSummary() {
 	std::string str = c.argument1();
 	if (summaries.count(str) > 0) {
 		currentSummary = summaries.at(str);
-		o.message("Loaded: " + str,4);
+		o.message("Loaded: " + str,o.blue);
 	}
 	else {
 		Summary* s = f.loadFromFile(str);
@@ -74,7 +74,7 @@ void loadSummary() {
 		else {
 			summaries.insert_or_assign(str, s);
 			currentSummary = summaries.at(str);
-			o.message("Loaded: " + str,4);
+			o.message("Loaded: " + str,o.blue);
 		}
 	}
 }
@@ -93,7 +93,7 @@ void viewSummary() {
 		o.message("No summary loaded");
 		return;
 	}
-	o.message("Viewing summary " + currentSummary->name,4);
+	o.message("Viewing summary " + currentSummary->name,o.blue);
 	o.drawSummary(currentSummary);
 }
 
