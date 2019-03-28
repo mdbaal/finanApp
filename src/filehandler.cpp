@@ -89,7 +89,7 @@ std::map<std::string, Summary*> Filehandler::loadDirectory() {
 
 bool Filehandler::deleteFile(std::string str) {
 	std::string _str = str.append(".txt");
-	if (std::remove(_str.c_str()) == 0) {
+	if (std::remove(("summaries/" + _str).c_str()) == 0) {
 		return true;
 	}
 	else {
