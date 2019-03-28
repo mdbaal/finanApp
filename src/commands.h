@@ -9,6 +9,7 @@
 #define LIST "list"
 #define LOAD "load"
 #define SAVE "save"
+#define COPY "copy"
 #define VIEW "view"
 #define ADD "add"
 #define REMOVE "remove"

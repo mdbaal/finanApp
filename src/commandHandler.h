@@ -17,7 +17,7 @@ public:
 	std::vector<std::string> arguments();
 	std::string command();
 	std::string argument1();
-	float argument2();
+	std::string argument2();
 
 private:
 	Input input =  Input();

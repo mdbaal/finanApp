@@ -88,6 +88,16 @@ void saveSummary() {
 	summaries.insert_or_assign(str, currentSummary);
 	o.message("Saved");
 }
+void copySummary() {
+	Summary* original = summaries.at(c.argument1());
+	Summary* copy = new Summary();
+	copy->name = original->name + '1';
+	copy->setMap(original->getMap());
+	summaries.insert_or_assign(copy->name, copy);
+	currentSummary = copy;
+	saveSummary();
+	o.message("Copied " + original->name + " with name " + copy->name);
+}
 void viewSummary() {
 	if (currentSummary == nullptr) {
 		o.message("No summary loaded");
@@ -107,7 +117,7 @@ void addToSummary() {
 		o.message("Missing name, adding entry failed");
 		return;
 	}
-	float f = c.argument2();
+	float f = std::stof(c.argument2(),NULL);
 	currentSummary->add(str, f);
 	o.message("Added " + str + " - " + std::to_string(f) + " to summary " + currentSummary->name);
 }
@@ -142,6 +152,10 @@ void getAction() {
 	}
 	else if (str == SAVE) {
 		saveSummary();
+		return;
+	}
+	else if (str == COPY) {
+		copySummary();
 		return;
 	}
 	else if (str == VIEW) {

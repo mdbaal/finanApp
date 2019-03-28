@@ -36,12 +36,9 @@ std::string CommandHandler::argument1() {
 	return argumentList[1];
 }
 //make call when program needs a value
-float CommandHandler::argument2() {
-	try {
-		if (argumentList.size() < 3) return 0;
-		return std::stof(argumentList[2], NULL);
-	}
-	catch (std::exception e) {
-		return 0;
-	}
+std::string CommandHandler::argument2() {
+
+	if (argumentList.size() < 3) return "";
+	return	argumentList[2], NULL;
+
 }

@@ -27,3 +27,6 @@ float Summary::getValue(std::string s) {
 		return 0;
 	}
 }
+void Summary::setMap(std::map<std::string, float> map) {
+	this->values = map;
+}
