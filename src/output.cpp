@@ -81,18 +81,20 @@ void Output::drawSummary(Summary* s) {
 }
 
 void Output::printHelp() {
-	std::cout << std::endl;
-	std::cout << "List of all commands:" << std::endl << std::endl;
-	std::cout << "* new <name> - create a new summary" << std::endl;
-	std::cout << "* delete <name> - delete a summary" << std::endl;
-	std::cout << "* load <name> - load a summary" << std::endl;
-	std::cout << "* save - save the currently loaded summary" << std::endl;
-	std::cout << "* view - print the current summary on screen" << std::endl;
-	std::cout << "* add <name> <value> - add a new entry to the current summary" << std::endl;
-	std::cout << "* remove <name> - remove an entry from the current summary" << std::endl;
-	std::cout << "* exit / quit - exits the program" << std::endl;
-	std::cout << "* help - show all commands" << std::endl;
-	std::cout << std::endl;
+	message("List of allcommands:");
+	message("* new <name> - create a new summary");
+	message("* delete <name> - delete a summary");
+	message("* list - shows all summaries created");
+	message("* load <name> - load a summary");
+	message("* save - saves the current summary");
+	message("* copy <name> - copies the given summary and loads the copy");
+	message("* rename <name1> <name2> - renames the summary to the new name");
+	message("* view - print the current summary on screen");
+	message("* add <name> <value> - add a new entry to the current summary");
+	message("* remove <name> - remove an entry from the current summary ");
+	message("* help - shows a list of all commands");
+	message("* clear - clears the screen");
+	message("* exit / quit - exits the program");
 }
 
 void Output::printSummariesList(std::map<std::string,Summary*> s) {

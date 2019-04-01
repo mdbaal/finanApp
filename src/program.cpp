@@ -224,6 +224,7 @@ void clean() {
 int main() {
 	//program loop
 	loadToSummaries();
+	o.message("Use 'help' to see all available commands", o.cyan);
 	while (running) {
 		o.message("Enter a command",o.cyan);
 		c.getInput();
