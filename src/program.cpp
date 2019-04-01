@@ -142,6 +142,10 @@ void removeFromSummary() {
 		return;
 	}
 	std::string str = c.argument1();
+	if (currentSummary->getMap().count(str) == 0) {
+		o.message("Entry doesn't exist");
+		return;
+	}
 	float f = currentSummary->getValue(str);
 	currentSummary->remove(str);
 	o.message("Removed " + str + " - " + std::to_string(f) + " from summary " + currentSummary->name);
