@@ -101,12 +101,15 @@ void copySummary() {
 	}
 }
 void renameSummary() {
-	copySummary();
-	Summary* renamed = currentSummary;
+	Summary* old = summaries.at(c.argument1());
+	Summary* renamed = new Summary();
+	renamed->name = c.argument2();
+	renamed->setMap(old->getMap());
 	renamed->name = c.argument2();
 	summaries.insert_or_assign(renamed->name, renamed);
 	deleteSummary();
 	currentSummary = renamed;
+	o.message("Renamed " + c.argument1() + " to " + c.argument2());
 }
 void viewSummary() {
 	if (currentSummary == nullptr) {
