@@ -89,6 +89,10 @@ void saveSummary() {
 	o.message("Saved");
 }
 void copySummary() {
+	if (summaries.count(c.argument1()) == 0) {
+		o.message("Summary doens't exist, copy failed");
+		return;
+	}
 	Summary* original = summaries.at(c.argument1());
 	Summary* copy = new Summary();
 	copy->name = original->name + '1';
@@ -96,11 +100,14 @@ void copySummary() {
 	summaries.insert_or_assign(copy->name, copy);
 	currentSummary = copy;
 	saveSummary();
-	if (c.command() == COPY) {
-		o.message("Copied " + original->name + " with name " + copy->name);
-	}
+	o.message("Copied " + original->name + " with name " + copy->name);
+
 }
 void renameSummary() {
+	if (summaries.count(c.argument1()) == 0) {
+		o.message("Summary doens't exist, rename failed");
+		return;
+	}
 	Summary* old = summaries.at(c.argument1());
 	Summary* renamed = new Summary();
 	renamed->name = c.argument2();
@@ -155,6 +162,10 @@ void removeFromSummary() {
 }
 
 void loaded() {
+	if (currentSummary == nullptr) {
+		o.message("No summary loaded");
+		return;
+	}
 	o.message("Current Summary: " + currentSummary->name,o.blue);
 }
 void quit() {
