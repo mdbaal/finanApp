@@ -96,7 +96,17 @@ void copySummary() {
 	summaries.insert_or_assign(copy->name, copy);
 	currentSummary = copy;
 	saveSummary();
-	o.message("Copied " + original->name + " with name " + copy->name);
+	if (c.command() == COPY) {
+		o.message("Copied " + original->name + " with name " + copy->name);
+	}
+}
+void renameSummary() {
+	copySummary();
+	Summary* renamed = currentSummary;
+	renamed->name = c.argument2();
+	summaries.insert_or_assign(renamed->name, renamed);
+	deleteSummary();
+	currentSummary = renamed;
 }
 void viewSummary() {
 	if (currentSummary == nullptr) {
@@ -117,9 +127,14 @@ void addToSummary() {
 		o.message("Missing name, adding entry failed");
 		return;
 	}
-	float f = std::stof(c.argument2(),NULL);
+	std::string str2 = c.argument2();
+	if (str2.empty() || str2 == "") {
+		o.message("Missing value, adding entry failed");
+		return;
+	}
+	float f = std::stof(str2,NULL);
 	currentSummary->add(str, f);
-	o.message("Added " + str + " - " + std::to_string(f) + " to summary " + currentSummary->name);
+	o.message("Added " + str + " - " + str2 + " to summary " + currentSummary->name);
 }
 void removeFromSummary() {
 	if (currentSummary == nullptr) {
@@ -156,6 +171,10 @@ void getAction() {
 	}
 	else if (str == COPY) {
 		copySummary();
+		return;
+	}
+	else if (str == RENAME) {
+		renameSummary();
 		return;
 	}
 	else if (str == VIEW) {

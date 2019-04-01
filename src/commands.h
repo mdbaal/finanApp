@@ -10,6 +10,7 @@
 #define LOAD "load"
 #define SAVE "save"
 #define COPY "copy"
+#define RENAME "rename"
 #define VIEW "view"
 #define ADD "add"
 #define REMOVE "remove"

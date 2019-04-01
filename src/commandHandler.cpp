@@ -39,6 +39,6 @@ std::string CommandHandler::argument1() {
 std::string CommandHandler::argument2() {
 
 	if (argumentList.size() < 3) return "";
-	return	argumentList[2], NULL;
+	return	argumentList[2];
 
 }
