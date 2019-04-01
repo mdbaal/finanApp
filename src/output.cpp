@@ -61,7 +61,7 @@ void Output::drawSummary(Summary* s) {
 		else {
 			std::cout << termcolor::green;
 		}
-		std::cout << it->first << " - " << it->second << std::endl << std::endl;
+		std::cout << it->first << ": " << it->second << std::endl << std::endl;
 		total += it->second;
 		std::cout << termcolor::reset;
 	}
