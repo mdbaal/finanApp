@@ -153,6 +153,10 @@ void removeFromSummary() {
 	currentSummary->remove(str);
 	o.message("Removed " + str + " - " + std::to_string(f) + " from summary " + currentSummary->name);
 }
+
+void loaded() {
+	o.message("Current Summary: " + currentSummary->name,o.blue);
+}
 void quit() {
 	o.message("Goodbye");
 	running = false;
@@ -170,6 +174,10 @@ void getAction() {
 	}
 	else if (str == LOAD) {
 		loadSummary();
+		return;
+	}
+	else if (str == LOADED) {
+		loaded();
 		return;
 	}
 	else if (str == SAVE) {

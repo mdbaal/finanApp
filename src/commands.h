@@ -8,6 +8,7 @@
 #define DEL "delete"
 #define LIST "list"
 #define LOAD "load"
+#define LOADED "loaded"
 #define SAVE "save"
 #define COPY "copy"
 #define RENAME "rename"
