@@ -10,7 +10,7 @@ for example:
 3. Savings for a vacation
 4. Your club' treasury
 
-This is the first of the 3 I have planned and it's a console application.
+This is the first of 3 application I have planned and it's a console application.
 
 ---
 
