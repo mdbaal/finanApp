@@ -142,6 +142,7 @@ void addToSummary() {
 		o.message("Missing value, adding entry failed");
 		return;
 	}
+	str2.resize(4);
 	float f = std::stof(str2,NULL);
 	currentSummary->add(str, f);
 	o.message("Added " + str + " - " + str2 + " to summary " + currentSummary->name);
@@ -239,12 +240,14 @@ void loadToSummaries() {
 }
 void clean() {
 	summaries.clear();
-	o.message("Cleaned pointers");
+	o.message("Cleared List");
 }
 
 
 int main() {
 	//program loop
+	system("Title FinanApp");
+
 	loadToSummaries();
 	o.message("Use 'help' to see all available commands", o.cyan);
 	while (running) {
