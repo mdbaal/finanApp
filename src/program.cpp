@@ -246,7 +246,7 @@ void clean() {
 
 int main() {
 	//program loop
-	system("Title FinanApp");
+	system("Title FinanApp \xa9 Mirco Baalmans");
 
 	loadToSummaries();
 	o.message("Use 'help' to see all available commands", o.cyan);
