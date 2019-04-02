@@ -8,7 +8,7 @@ for example:
 1. Your bank savings
 2. A period of time, i.e. months, weeks, etc
 3. Savings for a vacation
-4. Your club' treasury
+4. Your clubs treasury
 
 This is the first of 3 application I have planned and it's a console application.
 
